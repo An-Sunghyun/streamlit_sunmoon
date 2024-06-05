@@ -76,18 +76,18 @@ tab1, tab2, tab3 = st.tabs(["학생회관식당", "오렌지식당", "교직원�
 # 탭 내용 출력 함수
 def display_data(restaurant_name):
     if restaurant_name in data:
-        cols = st.columns(len(categories))
+        valid_categories = [category for category in categories if category in data[restaurant_name]]
+        cols = st.columns(len(valid_categories))
 
-        for i, category in enumerate(categories):
-            if category in data[restaurant_name]:
-                with cols[i]:
-                    color = category_colors.get(category, "#FFFFFF")
-                    st.markdown(f'<div class="category-box" style="border-color: {color};"><h3 style="background-color: {color};">{category}</h3>', unsafe_allow_html=True)
-                    for menus, date in data[restaurant_name][category]:
-                        st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
-                        for item in menus:
-                            st.write(f"- {item}")
-                    st.markdown('</div>', unsafe_allow_html=True)
+        for i, category in enumerate(valid_categories):
+            with cols[i]:
+                color = category_colors.get(category, "#FFFFFF")
+                st.markdown(f'<div class="category-box" style="border-color: {color};"><h3 style="background-color: {color};">{category}</h3>', unsafe_allow_html=True)
+                for menus, date in data[restaurant_name][category]:
+                    st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
+                    for item in menus:
+                        st.write(f"- {item}")
+                st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.write("No data found for today.")
 
