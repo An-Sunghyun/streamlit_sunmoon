@@ -122,13 +122,14 @@ st.markdown("""
         justify-content: center;
     }
     [data-baseweb="tab"] {
-        font-size: 1.5em !important;
+        font-size: 2.5em !important;
     }
     .category-box {
         background-color: #f9f9f9;
         padding: 10px;
         border-radius: 5px;
-        margin-top: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
         text-align: center;
         border: 2px solid;
     }
@@ -140,7 +141,7 @@ st.markdown("""
     }
     .category-box .date {
         color: #666666;
-        font-size: 0.9em;
+        font-size: 1.8em;
     }
     @media (max-width: 768px) {
         .stColumn {
