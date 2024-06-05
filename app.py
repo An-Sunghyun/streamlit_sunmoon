@@ -60,14 +60,37 @@ tab1, tab2, tab3 = st.tabs(["학생회관식당", "오렌지식당", "교직원�
 # 탭 내용 출력 함수
 def display_data(restaurant_name):
     if restaurant_name in data:
-        for category, menus in data[restaurant_name].items():
-            for menu_items, date in menus:
-                st.header(f"Restaurant: {restaurant_name}")
-                st.subheader(f"Category: {category}")
-                st.write(f"Date: {date}")
-                st.write("Menu:")
-                for item in menu_items:
-                    st.write(f"  - {item}")
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            st.header("한식")
+            if "한식" in data[restaurant_name]:
+                for menus, date in data[restaurant_name]["한식"]:
+                    st.subheader(f"Date: {date}")
+                    for item in menus:
+                        st.write(f"- {item}")
+            else:
+                st.write("No data")
+
+        with col2:
+            st.header("양식")
+            if "양식" in data[restaurant_name]:
+                for menus, date in data[restaurant_name]["양식"]:
+                    st.subheader(f"Date: {date}")
+                    for item in menus:
+                        st.write(f"- {item}")
+            else:
+                st.write("No data")
+
+        with col3:
+            st.header("분식")
+            if "분식" in data[restaurant_name]:
+                for menus, date in data[restaurant_name]["분식"]:
+                    st.subheader(f"Date: {date}")
+                    for item in menus:
+                        st.write(f"- {item}")
+            else:
+                st.write("No data")
     else:
         st.write("No data found for today.")
 
@@ -80,3 +103,36 @@ with tab2:
 
 with tab3:
     display_data("교직원식당")
+
+# 스타일링 추가
+st.markdown("""
+    <style>
+    .stApp {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    h1, h2, h3 {
+        color: #4CAF50;
+        text-align: center;
+    }
+    .stHeader {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .stSubheader {
+        color: #3a3a3a;
+        font-weight: bold;
+    }
+    .stText {
+        color: #555555;
+    }
+    @media (max-width: 768px) {
+        .stColumn {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+    </style>
+""", unsafe_allow_html=True)
