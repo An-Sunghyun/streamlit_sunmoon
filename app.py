@@ -127,17 +127,17 @@ st.markdown("""
         flex-direction: column;
         align-items: center;
         background-color: #f9f9f9;
-        padding: 10px;
-        border-radius: 5px;
-        margin-top: 5px;
-        margin-bottom: 5px;
+        padding: 5px;
+        border-radius: 2px;
+        margin-top: 2px;
+        margin-bottom: 2px;
         text-align: center;
         border: 2px solid;
     }
     .category-title {
         color: #ffffff;
-        padding: 10px;
-        border-radius: 5px;
+        padding: 5px;
+        border-radius: 2px;
         width: 100%;
         text-align: center;
         display: flex;
