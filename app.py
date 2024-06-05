@@ -120,6 +120,7 @@ st.markdown("""
     }
     .stTabs [role="tablist"] {
         justify-content: center;
+        font-size: 2em;
     }
     [data-baseweb="tab"] {
         font-size: 2em !important;
@@ -146,6 +147,7 @@ st.markdown("""
         align-items: center;
         justify-content: center;
         font-size: 1.5em;
+        font-weight: bold;
     }
     .category-box .date {
         color: #666666;
