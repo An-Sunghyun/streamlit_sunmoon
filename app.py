@@ -122,9 +122,12 @@ st.markdown("""
         justify-content: center;
     }
     [data-baseweb="tab"] {
-        font-size: 2.5em !important;
+        font-size: 2em !important;
     }
     .category-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background-color: #f9f9f9;
         padding: 10px;
         border-radius: 5px;
@@ -135,9 +138,10 @@ st.markdown("""
     }
     .category-box h3 {
         color: #ffffff;
-        text-align: center;
         padding: 10px;
         border-radius: 5px;
+        width: 100%;
+        text-align: center;
     }
     .category-box .date {
         color: #666666;
