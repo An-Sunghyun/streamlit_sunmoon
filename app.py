@@ -120,25 +120,32 @@ st.markdown("""
     }
     .stTabs [role="tablist"] {
         justify-content: center;
-        font-size: 2em;
     }
     [data-baseweb="tab"] {
-        font-size: 2.5em;
+        font-size: 2em !important;
     }
     .category-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background-color: #f9f9f9;
-        padding: 5px;
+        padding: 10px;
         border-radius: 5px;
         margin-top: 5px;
         margin-bottom: 5px;
         text-align: center;
         border: 2px solid;
     }
-    .category-box h3 {
+    .category-title {
         color: #ffffff;
-        text-align: center;
         padding: 10px;
         border-radius: 5px;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
     }
     .category-box .date {
         color: #666666;
