@@ -129,10 +129,10 @@ st.markdown("""
         flex-direction: column;
         align-items: center;
         background-color: #f9f9f9;
-        padding: 5px;
-        border-radius: 2px;
-        margin-top: 2px;
-        margin-bottom: 2px;
+        padding: 10px;
+        border-radius: 15px; 
+        margin-top: 5px;
+        margin-bottom: 5px;
         text-align: center;
         border: 2px solid;
     }
