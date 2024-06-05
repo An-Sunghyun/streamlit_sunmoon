@@ -84,7 +84,7 @@ def display_data(restaurant_name):
         for i, category in enumerate(valid_categories):
             with cols[i]:
                 color = category_colors.get(category, "#FFFFFF")
-                st.markdown(f'<div class="category-box" style="border-color: {color};"><h3 style="background-color: {color};">{category}</h3>', unsafe_allow_html=True)
+                st.markdown(f'<div class="category-box" style="background-color: {color};"><div class="category-title">{category}</div>', unsafe_allow_html=True)
                 for menus, date in data[restaurant_name][category]:
                     st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
                     for item in menus:
@@ -145,7 +145,6 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
     }
     .category-box .date {
         color: #666666;
