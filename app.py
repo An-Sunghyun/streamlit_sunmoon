@@ -151,7 +151,7 @@ st.markdown("""
     }
     .category-box .date {
         color: #666666;
-        font-size: 1.8em;
+        font-size: 2.5em;
     }
     @media (max-width: 768px) {
         .stColumn {
