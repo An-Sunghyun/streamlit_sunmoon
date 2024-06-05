@@ -129,16 +129,16 @@ st.markdown("""
         flex-direction: column;
         align-items: center;
         background-color: #f9f9f9;
-        padding: 10px;
+        padding: 5px;
         border-radius: 15px; /* 둥근 박스 설정 */
-        margin-top: 5px;
-        margin-bottom: 5px;
+        margin-top: 2px;
+        margin-bottom: 2px;
         text-align: center;
         border: 2px solid; /* 테두리 색상 */
     }
     .category-title {
         color: #ffffff;
-        padding: 10px;
+        padding: 5px;
         border-radius: 15px; /* 둥근 박스 설정 */
         width: 100%;
         text-align: center;
