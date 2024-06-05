@@ -120,9 +120,10 @@ st.markdown("""
     }
     .stTabs [role="tablist"] {
         justify-content: center;
+        font-size: 2em;
     }
     [data-baseweb="tab"] {
-        font-size: 10em;
+        font-size: 2.5em;
     }
     .category-box {
         background-color: #f9f9f9;
