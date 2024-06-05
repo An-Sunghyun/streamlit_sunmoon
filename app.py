@@ -38,15 +38,17 @@ def fetch_data():
     return rows
 
 # Streamlit 앱 구성
-st.title("오늘의 식단")
+st.markdown('<h1 class="title">오늘의 식단</h1>', unsafe_allow_html=True)
 
 # 데이터 가져오기
 rows = fetch_data()
 
 # 데이터 파싱
 data = {}
+categories = set()
 for row in rows:
     restaurant_name, food_category, menu, date = row
+    categories.add(food_category)
     if restaurant_name not in data:
         data[restaurant_name] = {}
     if food_category not in data[restaurant_name]:
@@ -54,46 +56,28 @@ for row in rows:
     menu_items = menu.split('|')
     data[restaurant_name][food_category].append((menu_items, date))
 
+# 카테고리를 리스트로 변환하여 정렬
+categories = sorted(list(categories))
+
 # 탭 구성
 tab1, tab2, tab3 = st.tabs(["학생회관식당", "오렌지식당", "교직원식당"])
 
 # 탭 내용 출력 함수
 def display_data(restaurant_name):
     if restaurant_name in data:
-        col1, col2, col3 = st.columns(3)
+        cols = st.columns(len(categories))
 
-        with col1:
-            st.markdown('<div class="category-box red"><h3>한식</h3>', unsafe_allow_html=True)
-            if "한식" in data[restaurant_name]:
-                for menus, date in data[restaurant_name]["한식"]:
-                    st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
-                    for item in menus:
-                        st.write(f"- {item}")
-            else:
-                st.write("No data")
-            st.markdown('</div>', unsafe_allow_html=True)
-
-        with col2:
-            st.markdown('<div class="category-box green"><h3>양식</h3>', unsafe_allow_html=True)
-            if "양식" in data[restaurant_name]:
-                for menus, date in data[restaurant_name]["양식"]:
-                    st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
-                    for item in menus:
-                        st.write(f"- {item}")
-            else:
-                st.write("No data")
-            st.markdown('</div>', unsafe_allow_html=True)
-
-        with col3:
-            st.markdown('<div class="category-box orange"><h3>분식</h3>', unsafe_allow_html=True)
-            if "분식" in data[restaurant_name]:
-                for menus, date in data[restaurant_name]["분식"]:
-                    st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
-                    for item in menus:
-                        st.write(f"- {item}")
-            else:
-                st.write("No data")
-            st.markdown('</div>', unsafe_allow_html=True)
+        for i, category in enumerate(categories):
+            with cols[i]:
+                st.markdown(f'<div class="category-box"><h3>{category}</h3>', unsafe_allow_html=True)
+                if category in data[restaurant_name]:
+                    for menus, date in data[restaurant_name][category]:
+                        st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
+                        for item in menus:
+                            st.write(f"- {item}")
+                else:
+                    st.write("No data")
+                st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.write("No data found for today.")
 
@@ -110,26 +94,30 @@ with tab3:
 # 스타일링 추가
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
     .stApp {
         max-width: 1200px;
         margin: 0 auto;
     }
-    h1 {
-        color: #4CAF50;
-        text-align: center;
+    .title {
+        font-family: 'Roboto', sans-serif;
         font-size: 2.5em;
+        color: #1E90FF;
+        text-align: center;
+        font-weight: bold;
     }
     .stTabs [role="tablist"] {
         justify-content: center;
     }
     [data-baseweb="tab"] {
-        font-size: 1.25em !important;
+        font-size: 1.5em !important;
     }
     .category-box {
         background-color: #f9f9f9;
         padding: 10px;
         border-radius: 5px;
         margin-top: 10px;
+        text-align: center;
     }
     .category-box h3 {
         color: #ffffff;
@@ -147,7 +135,6 @@ st.markdown("""
         background-color: #FFA726;
     }
     .category-box .date {
-        text-align: center;
         color: #666666;
         font-size: 0.9em;
     }
