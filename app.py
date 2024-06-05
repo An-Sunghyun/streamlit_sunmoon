@@ -63,34 +63,37 @@ def display_data(restaurant_name):
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            st.header("한식")
+            st.markdown('<div class="category-box red"><h3>한식</h3>', unsafe_allow_html=True)
             if "한식" in data[restaurant_name]:
                 for menus, date in data[restaurant_name]["한식"]:
-                    st.subheader(f"Date: {date}")
+                    st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
                     for item in menus:
                         st.write(f"- {item}")
             else:
                 st.write("No data")
+            st.markdown('</div>', unsafe_allow_html=True)
 
         with col2:
-            st.header("양식")
+            st.markdown('<div class="category-box green"><h3>양식</h3>', unsafe_allow_html=True)
             if "양식" in data[restaurant_name]:
                 for menus, date in data[restaurant_name]["양식"]:
-                    st.subheader(f"Date: {date}")
+                    st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
                     for item in menus:
                         st.write(f"- {item}")
             else:
                 st.write("No data")
+            st.markdown('</div>', unsafe_allow_html=True)
 
         with col3:
-            st.header("분식")
+            st.markdown('<div class="category-box orange"><h3>분식</h3>', unsafe_allow_html=True)
             if "분식" in data[restaurant_name]:
                 for menus, date in data[restaurant_name]["분식"]:
-                    st.subheader(f"Date: {date}")
+                    st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
                     for item in menus:
                         st.write(f"- {item}")
             else:
                 st.write("No data")
+            st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.write("No data found for today.")
 
@@ -111,21 +114,42 @@ st.markdown("""
         max-width: 1200px;
         margin: 0 auto;
     }
-    h1, h2, h3 {
+    h1 {
         color: #4CAF50;
         text-align: center;
+        font-size: 2.5em;
     }
-    .stHeader {
-        background-color: #f0f0f0;
+    .stTabs [role="tablist"] {
+        justify-content: center;
+    }
+    [data-baseweb="tab"] {
+        font-size: 1.25em !important;
+    }
+    .category-box {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    .category-box h3 {
+        color: #ffffff;
+        text-align: center;
         padding: 10px;
         border-radius: 5px;
     }
-    .stSubheader {
-        color: #3a3a3a;
-        font-weight: bold;
+    .category-box.red h3 {
+        background-color: #FF6F61;
     }
-    .stText {
-        color: #555555;
+    .category-box.green h3 {
+        background-color: #4CAF50;
+    }
+    .category-box.orange h3 {
+        background-color: #FFA726;
+    }
+    .category-box .date {
+        text-align: center;
+        color: #666666;
+        font-size: 0.9em;
     }
     @media (max-width: 768px) {
         .stColumn {
