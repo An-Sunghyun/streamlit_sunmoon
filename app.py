@@ -65,11 +65,9 @@ category_colors = {
     "한식": "#FF6F61",
     "양식": "#4CAF50",
     "분식": "#FFA726",
-    "일식": "#A52A2A",
+    "일식": "#FFD700",
     "중식": "#8A2BE2",
-    "기타": "#00CED1",
-    "점심" : "#4682B4",
-    "저녁" : "#C71585",
+    "기타": "#00CED1"
 }
 
 # 탭 구성
@@ -88,7 +86,7 @@ def display_data(restaurant_name):
                 for menus, date in data[restaurant_name][category]:
                     st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
                     for item in menus:
-                        st.write(f"- {item}")
+                        st.markdown(f'<li>{item}</li>', unsafe_allow_html=True)  # Using li for styling
                 st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.write("No data found for today.")
@@ -120,20 +118,19 @@ st.markdown("""
     }
     .stTabs [role="tablist"] {
         justify-content: center;
-        font-size: 2em;
     }
-    [data-baseweb="tab"] {
-        font-size: 2em !important;
+    [data-baseweb="tab"] button {
+        font-size: 1.5em !important;
     }
     .category-box {
         display: flex;
         flex-direction: column;
         align-items: center;
         background-color: #f9f9f9;
-        padding: 5;
-        border-radius: 2px;
-        margin-top: 2px;
-        margin-bottom: 2px;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
         text-align: center;
         border: 2px solid;
     }
@@ -146,12 +143,19 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5em;
-        font-weight: bold;
+        font-size: 1.8em; /* 글자 크기 조정 */
+        font-weight: bold; /* bold 처리 추가 */
     }
     .category-box .date {
         color: #666666;
-        font-size: 2.5em;
+        font-size: 1.8em;
+    }
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    li {
+        margin-bottom: 5px; /* 행 간격 조정 */
     }
     @media (max-width: 768px) {
         .stColumn {
