@@ -145,6 +145,7 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 1.5em;
     }
     .category-box .date {
         color: #666666;
