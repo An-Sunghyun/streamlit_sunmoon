@@ -48,16 +48,27 @@ data = {}
 categories = set()
 for row in rows:
     restaurant_name, food_category, menu, date = row
-    categories.add(food_category)
-    if restaurant_name not in data:
-        data[restaurant_name] = {}
-    if food_category not in data[restaurant_name]:
-        data[restaurant_name][food_category] = []
-    menu_items = menu.split('|')
-    data[restaurant_name][food_category].append((menu_items, date))
+    if menu:  # 메뉴가 있는 경우만 추가
+        categories.add(food_category)
+        if restaurant_name not in data:
+            data[restaurant_name] = {}
+        if food_category not in data[restaurant_name]:
+            data[restaurant_name][food_category] = []
+        menu_items = menu.split('|')
+        data[restaurant_name][food_category].append((menu_items, date))
 
 # 카테고리를 리스트로 변환하여 정렬
 categories = sorted(list(categories))
+
+# 카테고리 별 색상 매핑
+category_colors = {
+    "한식": "#FF6F61",
+    "양식": "#4CAF50",
+    "분식": "#FFA726",
+    "일식": "#FFD700",
+    "중식": "#8A2BE2",
+    "기타": "#00CED1"
+}
 
 # 탭 구성
 tab1, tab2, tab3 = st.tabs(["학생회관식당", "오렌지식당", "교직원식당"])
@@ -68,16 +79,15 @@ def display_data(restaurant_name):
         cols = st.columns(len(categories))
 
         for i, category in enumerate(categories):
-            with cols[i]:
-                st.markdown(f'<div class="category-box"><h3>{category}</h3>', unsafe_allow_html=True)
-                if category in data[restaurant_name]:
+            if category in data[restaurant_name]:
+                with cols[i]:
+                    color = category_colors.get(category, "#FFFFFF")
+                    st.markdown(f'<div class="category-box" style="border-color: {color};"><h3 style="background-color: {color};">{category}</h3>', unsafe_allow_html=True)
                     for menus, date in data[restaurant_name][category]:
                         st.markdown(f'<p class="date">{date}</p>', unsafe_allow_html=True)
                         for item in menus:
                             st.write(f"- {item}")
-                else:
-                    st.write("No data")
-                st.markdown('</div>', unsafe_allow_html=True)
+                    st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.write("No data found for today.")
 
@@ -118,21 +128,13 @@ st.markdown("""
         border-radius: 5px;
         margin-top: 10px;
         text-align: center;
+        border: 2px solid;
     }
     .category-box h3 {
         color: #ffffff;
         text-align: center;
         padding: 10px;
         border-radius: 5px;
-    }
-    .category-box.red h3 {
-        background-color: #FF6F61;
-    }
-    .category-box.green h3 {
-        background-color: #4CAF50;
-    }
-    .category-box.orange h3 {
-        background-color: #FFA726;
     }
     .category-box .date {
         color: #666666;
